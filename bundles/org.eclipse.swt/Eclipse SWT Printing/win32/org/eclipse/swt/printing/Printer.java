@@ -137,7 +137,7 @@ public static PrinterData getDefaultPrinterData() {
 	int n = OS.GetProfileString(appName, keyName, nullBuf, buf, length);
 	if (n == 0) return null;
 	int commaIndex = 0;
-	while(buf.tcharAt(commaIndex) != ',' && commaIndex < length) commaIndex++;
+	while(commaIndex < length && buf.tcharAt(commaIndex) != ',') commaIndex++;
 	if (commaIndex < length) {
 		deviceName = buf.toString(0, commaIndex);
 	}
@@ -145,7 +145,7 @@ public static PrinterData getDefaultPrinterData() {
 	String driver = ""; //$NON-NLS-1$
 	if (OS.GetProfileString(profile, new TCHAR(0, deviceName, true), nullBuf, buf, length) > 0) {
 		commaIndex = 0;
-		while (buf.tcharAt(commaIndex) != ',' && commaIndex < length) commaIndex++;
+		while (commaIndex < length && buf.tcharAt(commaIndex) != ',') commaIndex++;
 		if (commaIndex < length) {
 			driver = buf.toString(0, commaIndex);
 		}
